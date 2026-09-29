@@ -1,0 +1,33 @@
+# Allow-list: only our own sources, configs and records are tracked. Everything else stays out:
+# game content and the retail exe (copyrighted), the ISO, third-party downloads (vendor\, hashes recorded in the
+# ROADMAP), test captures (game\ts2diag\, planning\evidence\), scratch work (work\), and the three folders that are
+# their own git repositories (toy2-decomp\, ToyStory2Fix\, Toy-Story-2-Modding\).
+/*
+!/.gitignore
+!/CLAUDE.md
+
+!/planning/
+/planning/evidence/
+
+!/tools/
+*.exe
+*.dll
+*.asi
+*.obj
+*.lib
+*.exp
+*.pdb
+__pycache__/
+
+# game\: only the configuration we maintain
+!/game/
+/game/*
+!/game/dgVoodoo.conf
+!/game/winmm.ini
+!/game/alsoft.ini
+!/game/scripts/
+/game/scripts/*
+!/game/scripts/*.ini
+!/game/mods/
+/game/mods/*
+!/game/mods/README.txt
