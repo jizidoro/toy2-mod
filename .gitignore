@@ -5,6 +5,12 @@
 /*
 !/.gitignore
 !/CLAUDE.md
+!/README.md
+
+# vendor\: only the stb headers ts2tex builds with (public domain); every other download stays out
+!/vendor/
+/vendor/*
+!/vendor/stb/
 
 !/planning/
 /planning/evidence/
