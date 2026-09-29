@@ -207,6 +207,22 @@ static void FlushUvStats()                                    // one line per le
     memset(&g_uv, 0, sizeof(g_uv)); g_uvPending = false;
 }
 
+// Videos at 4:3 (O3 option). Every FMV goes through Nu3D_FMV_PlayMovie 0x004CE5F0 (one caller, 0x0049AAF4), which sizes
+// it with Nu3D_FMV_SetDimensions 0x004DB910 (fmv, x, y, w, h) = (0, 0, DestW, DestH) at 0x004CE621; each frame is then
+// Blt into that rectangle (UpdateAndRenderFMV 0x004DB950) after ShowBlackFrames 0x004CE5B0 cleared both buffers. The
+// rectangle becomes 4:3 of the height, centred, so the video keeps its shape with black bars. `fmv=stretch` in
+// game\ts2debug.txt (read when a video starts) keeps the full width.
+typedef void (__cdecl* FmvSetDimensions_t)(void* fmv, int x, int y, int w, int h);
+static FmvSetDimensions_t oFmvSetDimensions;
+static void __cdecl hFmvSetDimensions(void* fmv, int x, int y, int w, int h)
+{
+    bool stretch = DebugSwitchSet("fmv=stretch");
+    int nw = h > 0 ? (int)(h * 4.0f / 3.0f + 0.5f) : w;
+    if (!stretch && nw > 0 && nw < w) { x += (w - nw) / 2; w = nw; }
+    if (g_log) { fprintf(g_log, "video rectangle %d,%d %dx%d (%s)\n", x, y, w, h, stretch ? "stretched, fmv=stretch" : "4:3"); fflush(g_log); }
+    oFmvSetDimensions(fmv, x, y, w, h);
+}
+
 typedef int (__cdecl* CreateAllVertexBuffers_t)(char* prim, int flags);
 static CreateAllVertexBuffers_t oCreateAllVertexBuffers;
 static int __cdecl hCreateAllVertexBuffers(char* prim, int flags)
@@ -444,6 +460,7 @@ BOOL APIENTRY DllMain(HMODULE, DWORD reason, LPVOID)
     if (s == MH_OK) s = MH_CreateHook((void*)0x004BACF0, (void*)hPortalVisible, (void**)&oPortalVisible);   // debug switch only
     if (s == MH_OK) s = MH_CreateHook((void*)0x004B32E0, (void*)hCreateAllVertexBuffers, (void**)&oCreateAllVertexBuffers);
     if (s == MH_OK) s = MH_CreateHook((void*)0x0044F580, (void*)hLensFlareSlot, (void**)&oLensFlareSlot);
+    if (s == MH_OK) s = MH_CreateHook((void*)0x004DB910, (void*)hFmvSetDimensions, (void**)&oFmvSetDimensions);
     if (s == MH_OK) s = MH_EnableHook(MH_ALL_HOOKS);
     ReadDebugSwitches();                                      // switches that matter before the first level frame
     if (g_log) { fprintf(g_log, "ts2widescreen loaded; tilt constant %.6f; hooks %d\n", g_tilt0, (int)s); fflush(g_log); }

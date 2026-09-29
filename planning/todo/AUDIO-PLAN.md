@@ -75,4 +75,4 @@ give the game's DirectSound 3D audio OpenAL Soft's HRTF rendering (as the commun
 ## 10. Outcome (filled by /update-map when finished)
 - What happened: loader renamed (`winmm.dll`/`winmm.ini`, same bytes `09665143…`/`a516f527…`), DSOAL files copied (hashes match the repack). `winmm-toy2.log`: all ASIs loaded; toy2.exe modules include `game\DSOUND.dll` and `dsoal-aldrv.dll`; audiopeak over 140 s: peaks 0.08–0.94 through title and demo; blur 4 s: 0.00 while away, 0.08–0.10 after focus (AC1–AC3).
 - What the falsifiers said: none fired.
-- What changed in the state file: O15 🟡 (owner listening pending); What is live: loader is `winmm.dll`.
+- What changed in the state file: O15 🟡 (owner listening pending); What is live: loader is `winmm.dll`. Later the same day the loader itself was updated to DxWrapper v1.8.8600.25 (stub `winmm.dll` + `dxwrapper.dll`/`.ini`).

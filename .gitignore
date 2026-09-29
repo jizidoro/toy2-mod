@@ -23,7 +23,7 @@ __pycache__/
 !/game/
 /game/*
 !/game/dgVoodoo.conf
-!/game/winmm.ini
+!/game/dxwrapper.ini
 !/game/alsoft.ini
 !/game/scripts/
 /game/scripts/*

@@ -153,6 +153,6 @@ any single choke point exists; if none, record it ruled out with the counts. Smo
 | `C:\toy_story_2\CLAUDE.md` | the repo and what it excludes |
 
 ## 10. Outcome (filled by /update-map when finished)
-- What happened:
-- What the falsifiers said:
-- What changed in the state file:
+- What happened: W1: six user32 focus probes removed from ts2diag (log now "level-draw probe hooks enabled: 0"); blur test ×3 passed (window stays at DISPLAY1, frames advance); measure-120.ps1 reads the live frames.csv shared and waits for the presenter before reading its log: "best 5 s: DISPLAY1 120.0 images/s vs game 60.0 frames/s -> ratio 2.00"; O1 closed; gaps table cleaned. W2: repo at C:\toy_story_2, commit ad5de6a, 50 files, 148.5 KiB, no remote. W4: video rectangle 480,0 2880x2160 (4:3) with black bars (max 0), fmv=stretch gives 0,0 3840x2160. W5: no code; demo frames under pointmip show no neighbour lines; the construction-yard long view moves to W3. W6: 698 of 832 T-junction vertices are between instances: stop. W7: 540 references / 131 functions / no choke point: ruled out. W3 deferred by the owner.
+- What the falsifiers said: none fired for W1, W2, W4. W6 stop condition fired (84% between instances). W7 stop condition fired (no choke point). W5 inconclusive at distance (the demo has no long views): owner check.
+- What changed in the state file: O1 ✅, O18 ✅, O19 ⛔, O16 ⛔ with the counts, O3 videos, O17 step 6 note; Now = the deferred W3 checks.
