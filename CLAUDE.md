@@ -1,7 +1,8 @@
 # Toy Story 2 (PC, 1999) — local play and improvement workspace
 
 State: `planning/ROADMAP.md`, read with /checkin, written with /update-map; plans from `planning/TEMPLATE.md`.
-Local git repo (no remote; push only with the owner's OK): `.gitignore` is an allow-list of our sources, configs and
+Git repo, remote `origin` = https://github.com/jizidoro/toy2-mod (the owner's personal account; the URL carries the
+user name `jizidoro@` so Git Credential Manager uses that login; push only with the owner's OK): `.gitignore` is an allow-list of our sources, configs and
 records; game content, the retail exe, the ISO, vendor binaries, captures and the nested repos never go in.
 
 - `game\` — the playable install (`toy2.exe` = retail `023eb6a9…` with only the Large Address Aware header flag and
